@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Cyber Escape Room: Entry Gate</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body oncontextmenu="return false;" oncopy="return false;" oncut="return false;" onpaste="return false;">
+    <div class="container">
+        <h1>SECURITY CLEARANCE REQUIRED</h1>
+        <p>Please enter the Secret Code URL retrieved from Round-1 to verify your identity.</p>
+        
+        {% if error %}
+            <p class="error-text" style="color: #ff3333; margin-top: 10px;">{{ error }}</p>
+        {% endif %}
+        
+        <form action="/verify_code" method="POST" style="margin-top: 20px;">
+            <div style="margin-bottom: 15px;">
+                <input type="text" name="secret_code" placeholder="http://x.y.z.w:port" required style="width: 300px; text-align: center; font-size: 1.2rem; color: #39ff14; background: transparent; border: 1px solid #39ff14; padding: 10px;">
+            </div>
+            <button type="submit" class="btn">Verify Identity</button>
+        </form>
+    </div>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>

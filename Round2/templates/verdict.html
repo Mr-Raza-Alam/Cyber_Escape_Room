@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Verdict — Cyber Escape Arena</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <style>
+        .verdict-box {
+            padding: 2rem;
+            border-radius: 4px;
+            margin: 1.5rem 0;
+        }
+        /* ===== TIER: 8/8 ACCESS GRANTED ===== */
+        .verdict-success {
+            border: 2px solid #39ff14;
+            background: rgba(57,255,20,0.05);
+        }
+        .verdict-success h1 {
+            color: #39ff14;
+            font-size: 2.5rem;
+            text-shadow: 0 0 20px #39ff14;
+            animation: flicker 3s infinite;
+        }
+        @keyframes flicker {
+            0%,19%,21%,23%,25%,54%,56%,100% { opacity: 1; }
+            20%,24%,55% { opacity: 0.4; }
+        }
+        .location-box {
+            background: #000;
+            border: 1px solid #39ff14;
+            padding: 20px;
+            margin: 1.5rem 0;
+            box-shadow: 0 0 20px rgba(57,255,20,0.3);
+        }
+        .location-id {
+            font-size: 2.8rem;
+            color: #39ff14;
+            text-shadow: 0 0 15px #39ff14;
+            margin: 10px 0;
+        }
+
+        /* ===== TIER: 6-7 BORDERLINE ===== */
+        .verdict-borderline {
+            border: 2px solid #f0a500;
+            background: rgba(240,165,0,0.05);
+        }
+        .verdict-borderline h1 {
+            color: #f0a500;
+            font-size: 2rem;
+            text-shadow: 0 0 15px #f0a500;
+        }
+        .verdict-borderline p { color: #f0a500; }
+        .blink-amber {
+            animation: blink 1.5s step-end infinite;
+            color: #f0a500;
+        }
+        @keyframes blink { 50% { opacity: 0; } }
+
+        /* ===== TIER: <6 ELIMINATED ===== */
+        .verdict-eliminated {
+            border: 2px solid #ff3333;
+            background: rgba(255,51,51,0.05);
+        }
+        .verdict-eliminated h1 {
+            color: #ff3333;
+            font-size: 2rem;
+            text-shadow: 0 0 15px #ff3333;
+        }
+        .verdict-eliminated p { color: #aaa; }
+
+        .stat-row {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin: 1rem 0;
+            font-size: 0.9rem;
+            color: #888;
+        }
+        .stat-row span strong { color: #39ff14; }
+        .divider {
+            border: none;
+            border-top: 1px dashed #333;
+            margin: 1.2rem 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+
+        <!-- Shared Stats Row -->
+        <div class="stat-row">
+            <span>SCORE: <strong>{{ score }}/8</strong></span>
+            <span>TIME: <strong>{{ time_taken // 60 }}m {{ time_taken % 60 }}s</strong></span>
+            <span>PENALTY HITS: <strong style="color:#ff3333;">{{ wrong_attempts }}</strong></span>
+        </div>
+        <hr class="divider">
+
+        {% if score == 8 %}
+        <!-- ===== 8/8: FULL SUCCESS ===== -->
+        <div class="verdict-box verdict-success">
+            <h1>✅ ACCESS GRANTED</h1>
+            <p>Exceptional work, Hacker. You have successfully decrypted the firewall<br>
+               and unlocked the path to the next round.</p>
+
+            <div class="location-box">
+                <h3>📦 Next Packet Location ID</h3>
+                <div class="location-id">{{ packet_id }}</div>
+            </div>
+
+            <p style="font-size:0.9rem; color:#aaa;">
+                ⚠️ Write this ID on your answer sheet and report to
+                <strong style="color:#39ff14;">Volunteer No-1</strong> immediately.
+            </p>
+        </div>
+
+        {% elif score >= 6 %}
+        <!-- ===== 6-7: BORDERLINE ===== -->
+        <div class="verdict-box verdict-borderline">
+            <h1>⏳ STANDBY, HACKER</h1>
+            <hr class="divider" style="border-color: rgba(240,165,0,0.3);">
+            <p class="blink-amber">⚡ Your result is under review by the organizer.</p>
+            <p>
+                You have demonstrated considerable skill.
+                A final decision on your qualification will be made
+                based on <strong>time taken</strong>, <strong>score</strong>,
+                and <strong>accuracy</strong>.
+            </p>
+            <p style="font-size: 0.85rem; color: #888; margin-top:1.5rem;">
+                🪑 Please remain at your seat and wait for a volunteer to contact you.
+                Do <strong style="color:#f0a500;">NOT</strong> close this screen.
+            </p>
+        </div>
+
+        {% else %}
+        <!-- ===== <6: ELIMINATED ===== -->
+        <div class="verdict-box verdict-eliminated">
+            <h1>❌ SESSION TERMINATED</h1>
+            <hr class="divider" style="border-color: rgba(255,51,51,0.3);">
+            <p style="font-size:1.1rem;">
+                You decrypted <strong style="color:#ff3333;">{{ score }} out of 8</strong> modules.
+            </p>
+            <p>
+                Every expert hacker was once a beginner. The firewall held strong today,
+                but your journey is just getting started. Keep practicing — great things take time. 💪
+            </p>
+            <p style="font-size:0.85rem; color:#666; margin-top:1.5rem;">
+                🚪 You may close this window. Thank you for participating!
+            </p>
+        </div>
+        {% endif %}
+
+    </div>
+</body>
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cyber Escape Room - Access Interface</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Share+Tech+Mono&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <div class="overlay-grid"></div>
+    <div class="container glassmorphism">
+        <div class="header">
+            <h1 class="glitch" data-text="CYBER ESCAPE ROOM">CYBER ESCAPE ROOM</h1>
+            <p class="subtitle">Welcome to the Ultimate Technical Challenge at Yantraksh 2026</p>
+
+            <div
+                style="text-align: left; background: rgba(0,0,0,0.4); padding: 20px; border-radius: 8px; margin: 20px 0; border-left: 4px solid var(--primary);">
+                <p style="color: #fff; line-height: 1.6; margin-bottom: 10px;">
+                    This is a highly-classified, 4-Round elimination tournament designed to test your logical aptitude,
+                    technical skills, and ability to crack systems under pressure.
+                </p>
+                <ul style="color: #00f0ff; list-style-type: square; margin-left: 20px; line-height: 1.6;">
+                    <li><strong>Round 1:</strong> IP Payload Assembly</li>
+                    <li><strong>Round 2:</strong> Firewall Decryption Protocol</li>
+                    <li><strong>Round 3:</strong> Circuit Breach</li>
+                    <li><strong>Round 4:</strong> Hack the Network</li>
+                </ul>
+                <p style="color: #ff003c; margin-top: 15px; font-weight: bold; text-align: center;">Wait for the
+                    Organizer to announce the Global Access PIN.</p>
+            </div>
+        </div>
+
+        <div class="auth-box">
+            <p id="error-msg" class="error-msg hidden">Access Denied. Invalid Authorization Code.</p>
+            <div class="input-group">
+                <input type="password" id="global-pin" maxlength="4" placeholder="••••" autocomplete="off">
+            </div>
+            <button id="btn-start" class="btn-primary">START CER GAME</button>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('btn-start').addEventListener('click', () => {
+            const pin = document.getElementById('global-pin').value;
+            fetch('/verify_pin', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ pin: pin })
+            })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.status === 'success') {
+                        window.location.href = '/round1';
+                    } else {
+                        const err = document.getElementById('error-msg');
+                        err.classList.remove('hidden');
+                        err.classList.add('shake');
+                        setTimeout(() => err.classList.remove('shake'), 400);
+                    }
+                });
+        });
+    </script>
+</body>
+
+</html>

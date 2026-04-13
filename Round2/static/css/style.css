@@ -1,0 +1,103 @@
+body {
+    background-color: #0d1117;
+    color: #39ff14; /* Neon green */
+    font-family: 'Courier New', Courier, monospace;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    user-select: none;
+    -webkit-user-select: none;
+}
+.container {
+    background: #161b22;
+    border: 1px solid #39ff14;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 0 15px rgba(57, 255, 20, 0.2);
+    max-width: 800px;
+    width: 90%;
+    text-align: center;
+}
+h1, h2, h3 { text-transform: uppercase; letter-spacing: 2px; }
+.btn {
+    background-color: transparent;
+    color: #39ff14;
+    border: 2px solid #39ff14;
+    padding: 10px 20px;
+    font-size: 1.2rem;
+    font-family: inherit;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    margin-top: 20px;
+}
+.btn:hover {
+    background-color: #39ff14;
+    color: #0d1117;
+    box-shadow: 0 0 10px #39ff14;
+}
+.btn:disabled {
+    border-color: #ff3333;
+    color: #ff3333;
+    cursor: not-allowed;
+    background-color: transparent;
+    box-shadow: none;
+}
+input[type="text"] {
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid #39ff14;
+    color: #39ff14;
+    font-family: inherit;
+    font-size: 1.2rem;
+    padding: 5px;
+    text-align: center;
+    outline: none;
+    width: 200px;
+    transition: width 0.3s;
+}
+input[type="text"]:focus {
+    width: 250px;
+}
+input[type="text"]:disabled {
+    border-color: #555;
+    color: #555;
+}
+.input-group {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-start;
+    align-items: center;
+}
+.question-card {
+    border: 1px dashed #555;
+    padding: 15px;
+    margin-bottom: 20px;
+    text-align: left;
+    transition: all 0.3s ease;
+}
+.question-card img {
+    max-width: 100%;
+    border: 1px solid #333;
+    /* Optional: filter to make screenshots of code look like dark mode if they are standard white */
+    /* filter: invert(1) hue-rotate(180deg); */
+}
+.status-msg { margin-top: 10px; font-weight: bold; min-height: 24px; }
+.correct-text { color: #39ff14; }
+.error-text { color: #ff3333; }
+#timer {
+    font-size: 3rem;
+    color: #ff3333;
+    margin-bottom: 30px;
+    text-shadow: 0 0 10px rgba(255, 51, 51, 0.5);
+    position: sticky;
+    top: 20px;
+    background: #0d1117;
+    padding: 10px 30px;
+    border: 2px dashed #ff3333;
+    z-index: 100;
+}

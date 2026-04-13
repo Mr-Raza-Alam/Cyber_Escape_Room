@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Admin - Round 4</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="admin-mode">
+
+<div class="screen">
+  <div class="admin-card">
+    <h2>Admin Setup</h2>
+    <p>Cyber Escape Room — Round 4</p>
+
+    <div id="admin-main">
+      <div class="form-group">
+        <label>Participant Names & Target IPv4 Addresses</label>
+        <p style="font-size: 11px; color:#6b82a8; margin-bottom: 10px;">Enter the exact IP assigned. The system will automatically expect participants to enter it in reverse sequence.</p>
+        <div class="participants-list" id="participants-list">
+          <!-- Rows added by JS -->
+        </div>
+        <button class="btn-add-p" onclick="addParticipantRow()">+ Add Participant</button>
+      </div>
+
+      <button class="btn-primary" onclick="setupRound()">Save Setup</button>
+      <button class="btn-primary" onclick="startRound()" style="background: #ef4444; color: white; display: none;" id="start-btn">Start 15 Min Timer</button>
+      
+      <div class="error-msg" id="admin-error"></div>
+      <div class="success-msg" id="admin-success"></div>
+    </div>
+  </div>
+
+  <div class="log-card" id="log-card" style="display:none;">
+    <h2 style="color: #4a7fc1; margin-bottom: 16px; font-size: 18px;">Live Logs & Status</h2>
+    <div style="color:#00e5a0; font-size: 24px; font-weight:bold; margin-bottom: 16px; font-family: monospace;" id="timer-display">Waiting to start...</div>
+    <table class="log-table">
+      <thead>
+        <tr>
+          <th>#</th><th>Name</th><th>Submitted IP</th><th>Score</th><th>Status</th><th>Clock Time</th><th>Elapsed</th>
+        </tr>
+      </thead>
+      <tbody id="log-body"></tbody>
+    </table>
+  </div>
+</div>
+
+<script src="{{ url_for('static', filename='admin.js') }}"></script>
+</body>
+</html>

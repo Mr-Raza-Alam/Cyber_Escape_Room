@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Cyber Escape Room — Round 4</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="participant-mode">
+
+<div id="screen-dashboard" class="screen active">
+  <div class="top-bar">
+    <span class="brand">Cyber Escape Room</span>
+    <span class="round-label">Round 4 — Hack the Network</span>
+  </div>
+  <div class="round-ended-banner">ROUND ENDED — Time's up!</div>
+  <div class="global-timer">
+    <div class="timer-label" id="timer-text-1">Time Remaining</div>
+    <div class="timer-value" id="timer-display-1">--:--</div>
+  </div>
+  <div class="dash-body">
+    <div class="dash-title" id="dash-title-text">Waiting for Admin to Start...</div>
+    <div class="name-grid" id="name-grid"></div>
+  </div>
+</div>
+
+<div id="screen-entry" class="screen">
+  <div class="top-bar">
+    <span class="brand">Cyber Escape Room</span>
+    <span class="round-label">Round 4 — Hack the Network</span>
+  </div>
+  <div class="round-ended-banner">ROUND ENDED — Time's up!</div>
+  <div class="global-timer">
+    <div class="timer-label" id="timer-text-2">Time Remaining</div>
+    <div class="timer-value" id="timer-display-2">--:--</div>
+  </div>
+  <div class="entry-body">
+    <div class="entry-card">
+      <div class="entry-greeting">Participant</div>
+      <div class="entry-name" id="entry-participant-name">—</div>
+      <div class="entry-instruction">
+        Enter your collected octet values in <strong>Reverse Sequence Order</strong>. <br/><br/>
+        <em>If you didn't find all 4, leave the unknown octets blank and submit to receive partial points.</em> You can only submit once.
+      </div>
+      <div class="feedback-box" id="feedback-box"></div>
+      <div class="octet-row">
+        <div class="octet-wrap"><label>Reverse 1</label><input class="octet-input" id="e1" type="number" min="0" max="255" placeholder="—" oninput="updatePreview()"/></div>
+        <span class="octet-dot">.</span>
+        <div class="octet-wrap"><label>Reverse 2</label><input class="octet-input" id="e2" type="number" min="0" max="255" placeholder="—" oninput="updatePreview()"/></div>
+        <span class="octet-dot">.</span>
+        <div class="octet-wrap"><label>Reverse 3</label><input class="octet-input" id="e3" type="number" min="0" max="255" placeholder="—" oninput="updatePreview()"/></div>
+        <span class="octet-dot">.</span>
+        <div class="octet-wrap"><label>Reverse 4</label><input class="octet-input" id="e4" type="number" min="0" max="255" placeholder="—" oninput="updatePreview()"/></div>
+      </div>
+      <div class="ip-preview" id="ip-preview">___.___.___.___</div>
+      <button class="submit-btn" id="submit-btn" onclick="submitIP()">Submit Final IPv4</button>
+      <button class="back-btn" onclick="goToDashboard()">Back to Name Selection</button>
+    </div>
+  </div>
+</div>
+
+<div id="screen-leaderboard" class="screen">
+  <div class="lb-body">
+    <div class="lb-title">ROUND ENDED</div>
+    <div class="lb-subtitle">Final Leaderboard</div>
+    <table class="lb-table">
+      <thead>
+        <tr><th>Rank</th><th>Participant</th><th>Submission</th><th>Score Out of 4</th><th>Time Taken</th></tr>
+      </thead>
+      <tbody id="lb-body"></tbody>
+    </table>
+  </div>
+</div>
+
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

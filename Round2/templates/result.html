@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Decryption Complete — Scorecard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <style>
+        .score-grid {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin: 2rem 0;
+        }
+        .stat-box {
+            background: #000;
+            border: 1px solid #39ff14;
+            padding: 1.5rem 2rem;
+            min-width: 150px;
+            text-align: center;
+            box-shadow: 0 0 12px rgba(57,255,20,0.15);
+        }
+        .stat-label {
+            font-size: 0.8rem;
+            color: #888;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+        }
+        .stat-value {
+            font-size: 2.8rem;
+            font-weight: bold;
+            color: #39ff14;
+            text-shadow: 0 0 10px #39ff14;
+        }
+        .stat-value.penalty {
+            color: #ff3333;
+            text-shadow: 0 0 10px #ff3333;
+        }
+        .blink {
+            animation: blink 1.2s step-end infinite;
+        }
+        @keyframes blink {
+            50% { opacity: 0; }
+        }
+        .divider {
+            border: none;
+            border-top: 1px dashed #333;
+            margin: 1.5rem 0;
+        }
+        .decrypt-btn {
+            background: #39ff14 !important;
+            color: #0d1117 !important;
+            font-size: 1.5rem !important;
+            width: 100%;
+            letter-spacing: 3px;
+            padding: 15px !important;
+            margin-top: 1.5rem !important;
+            animation: pulse 2s ease-in-out infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 0 10px #39ff14; }
+            50% { box-shadow: 0 0 30px #39ff14, 0 0 60px rgba(57,255,20,0.4); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+
+        <p class="blink" style="color:#888; font-size:0.85rem; letter-spacing:3px;">— ANALYSIS COMPLETE —</p>
+        <h1 style="font-size:2rem; margin: 0.5rem 0;">Decryption Report</h1>
+        <hr class="divider">
+
+        <div class="score-grid">
+            <div class="stat-box">
+                <div class="stat-label">🔐 Score</div>
+                <div class="stat-value">{{ score }} / {{ total }}</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-label">⏱️ Time Taken</div>
+                <div class="stat-value" style="font-size:2rem;">
+                    {{ time_taken // 60 }}m {{ time_taken % 60 }}s
+                </div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-label">⚡ Penalty Hits</div>
+                <div class="stat-value penalty">{{ wrong_attempts }}</div>
+            </div>
+        </div>
+
+        <hr class="divider">
+
+        <p style="color:#888; font-size:0.9rem; margin-bottom: 0;">
+            Your performance has been recorded. Press below to reveal your verdict.
+        </p>
+
+        <a href="/verdict">
+            <button class="btn decrypt-btn">🔓 DECRYPT RESULT</button>
+        </a>
+
+    </div>
+</body>
+</html>

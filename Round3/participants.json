@@ -1,0 +1,34 @@
+[
+    {
+        "name": "RAMESH KUMAR",
+        "set": 2,
+        "status": "success",
+        "start_time": 1775975620.0370448,
+        "time_taken": 66
+    },
+    {
+        "name": "AAKRTIT KUMARI",
+        "set": 3,
+        "status": "pending",
+        "start_time": null
+    },
+    {
+        "name": "PRIYANKA BISWAS",
+        "set": 4,
+        "status": "pending",
+        "start_time": 1775981191.174994
+    },
+    {
+        "name": "RAUSHAN KUMAR",
+        "set": 3,
+        "status": "pending",
+        "start_time": null
+    },
+    {
+        "name": "RAVI SHARMA",
+        "set": 1,
+        "status": "success",
+        "start_time": 1775980319.7424464,
+        "time_taken": 582
+    }
+]

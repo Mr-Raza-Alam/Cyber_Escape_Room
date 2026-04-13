@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Weapon Selection</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Select Your Weapon</h1>
+        <p>Choose the programming language for this firewall encryption challenge.</p>
+        <form action="/select_language" method="POST" style="display: flex; gap: 20px; justify-content: center; margin-top:30px;" onsubmit="enterFullScreen()">
+            <button type="submit" name="language" value="c" class="btn">[ C ]</button>
+            <button type="submit" name="language" value="py" class="btn">[ Python ]</button>
+        </form>
+    </div>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>

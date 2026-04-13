@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Decryption Successful</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container" style="border-color: #39ff14;">
+        <h1>ACCESS GRANTED</h1>
+        <p>Congratulations! You have successfully decrypted the firewall and unlocked the Round-3 door.</p>
+        <p>Time taken: <strong>{{ time_taken // 60 }}m {{ time_taken % 60 }}s</strong></p>
+        <div style="background: #000; border: 1px solid #39ff14; padding: 20px; margin: 30px 0;">
+            <h3>Next Packet Location ID:</h3>
+            <h1 style="font-size: 3rem; margin: 10px 0;text-shadow: 0 0 10px #39ff14;">{{ packet_id }}</h1>
+        </div>
+        <p>Please write this ID on your answer sheet and report to Volunteer No-1 immediately.</p>
+    </div>
+</body>
+</html>

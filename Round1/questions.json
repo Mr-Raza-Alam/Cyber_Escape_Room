@@ -1,0 +1,37 @@
+{
+    "1": {
+        "Q1": "Q1.  A spy sends a coded message. The message says: \"I have as many secrets as the number of fingers on both hands.\" But his enemy intercepts it and doubles the confusion by adding the number of fingers on one hand to the number of fingers on the other hand. What single number does the enemy decode?",
+        "Q2": "Q2. A password generator takes a 2-digit number, multiplies it by 101, and outputs the result. The seed used is 'the sum of the first 5 odd prime numbers'. What is the output password?",
+        "Q3": "Q3.  A virus replicates in a strange way \u2014 it always produces offspring equal to the number of letters in its current count written in English. It starts at count ONE. How many copies exist after the first replication?",
+        "Q4": "Q4.  A cybersecurity team has 8 members. Every member must do a one-on-one briefing with every other member exactly once. How many total briefings take place?",
+        "Q5": "Q5.  Two fathers and two sons sat down to crack passwords. They cracked 9 passwords in total \u2014 each person cracking the same number. How many passwords did each person crack?"
+    },
+    "2": {
+        "Q1": "Q1.  A suspicious process allocates memory in powers of 2. Starting from 2^1, it keeps doubling until the allocated block exceeds 1000 bytes. How many allocation steps does it take?",
+        "Q2": "Q2.  Two spy programs exchange handshakes. Program A sends messages numbered by the first 4 even numbers . Program B sends messages numbered by the first 4 odd numbers.. A rogue interceptor reads the sum of ALL messages sent by both. What number does the interceptor decode? Note number > 0",
+        "Q3": "Q3.  A digital lock opens only when you input the number of distinct prime factors of 360. What is the unlock code?",
+        "Q4": "Q4.  An intrusion detection system flags packets using prime gaps. It starts at the prime 2. Every time two consecutive primes have a gap greater than 4, it logs the second prime. What is the 3rd logged prime?",
+        "Q5": "Q5.  A secure tunnel's port number is calculated as: (sum of all odd numbers from 1 to 19) multiplied by (number of letters in the word 'CYBERSECURITY'). What is the port number?"
+    },
+    "3": {
+        "Q1": "Q1.  A spy sends a coded message. The message says: \"I have as many secrets as the number of fingers on both hands.\" But his enemy intercepts it and doubles the confusion by adding the number of fingers on one hand to the number of fingers on the other hand. What single number does the enemy decode?",
+        "Q2": "Q2.  A threat intelligence feed updates using a Fibonacci-like rule (F1=1, F2=1, Fn = Fn-1 + Fn-2). The 9th update carries the critical alert threshold. What is the threshold value?\n",
+        "Q3": "Q3.  A 4-member security response team needs to choose 2 members to handle a live incident. In how many ways can this pair be selected?\n",
+        "Q4": "Q4.  A network scanner probes ports in multiples of 8: port 8, port 16, port 24, and so on. Which port does it probe on the 13th scan?\n",
+        "Q5": "Q5.  An RSA-style key is generated using two prime numbers P = 13 and Q = 19. The public modulus N is computed as N = P \u00d7 Q. What is N?\n"
+    },
+    "4": {
+        "Q1": "Q1.  A hacker's decoder ring only accepts lucky prime numbers \u2014 primes that remain prime when you reverse their digits. Starting from 2, what is the 6th such prime?",
+        "Q2": "Q2.  A cryptographic hash function produces a 3-digit output. The number is the double of    the smallest 3-digit number divisible by both 6 and 9.  What is the  hash?",
+        "Q3": "Q3.  A botnet recruits machines using a ladder algorithm: it starts with 1 machine, and each step it adds as many machines as the current step number. After how many steps does the total number of machines first reach exactly 91?",
+        "Q4": "Q4.  An intrusion detection system flags packets using prime gaps. It starts at the prime 2. Every time two consecutive primes have a gap greater than 4, it logs the second prime. What is the 3rd logged prime?",
+        "Q5": "Q5.  A cipher machine takes a 2-digit seed, finds all its factors (including 1 and itself), sums them, and repeats the process on the sum exactly once more. The seed is 48. What is the final output after two iterations?"
+    },
+    "5": {
+        "Q1": "Q1.  A memory allocator doubles its buffer size every cycle, starting from 1 byte. After how       many doublings does the buffer size reach exactly 16 bytes?\n",
+        "Q2": "Q2.  A network admin notices that his system's temperature alert triggers at every prime number degree. Starting from the lowest prime, the 16th alert triggers the system shutdown. At what temperature (in degrees) does the system shut down?",
+        "Q3": "Q3.  Two fathers and two sons sat down to crack passwords. They cracked 9 passwords in total \u2014 each person cracking the same number. How many passwords did each person crack?",
+        "Q4": "Q4.  A hacker climbs a server rack with 7 levels, placing cables equal to the level number on each level (1 cable on level 1, 2 cables on level 2, and so on). How many total cables does he use across all 7 levels?",
+        "Q5": "Q5.   A network security audit checks servers numbered 1 to 100. It flags every server whose number is both a factor of 120 and a single-digit number. How many servers are flagged?"
+    }
+}

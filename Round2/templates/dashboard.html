@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Round 2 - Cyber Escape Arena</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script>
+        const initialRemaining = parseInt("{{ remaining }}", 10);
+        const initialSolved = parseInt("{{ solved_count }}", 10);
+    </script>
+</head>
+<body oncontextmenu="return false;" oncopy="return false;" oncut="return false;" onpaste="return false;">
+    <div id="timer">--:--</div>
+    
+    <div class="container" style="max-width: 900px;">
+        <h2>Firewall Decryption Protocol</h2>
+        <p>Language: <strong>{{ 'C' if lang == 'c' else 'Python' }}</strong></p>
+        
+        <div id="questions-container">
+            {% for q in questions %}
+                <div class="question-card" id="card_{{ q.id }}" {% if q.id in solved %}style="border-color: #39ff14; opacity: 0.7;"{% endif %}>
+                    <h3>Module {{ loop.index }}</h3>
+                    
+                    <!-- Displaying image. Fallback to placeholder if not exists -->
+                    <div style="background: #000; padding: 10px; margin-bottom: 10px; text-align: center;">
+                        <img src="{{ url_for('static', filename='images/' + q.id + '.png') }}" alt="Code Snippet" draggable="false" style="pointer-events: none;" onerror="this.onerror=null; this.src='https://via.placeholder.com/600x200/000/39ff14?text=Code+Snippet+'+'{{ q.id }}';">
+                    </div>
+                    
+                    {% if q.id in solved %}
+                        <p class="correct-text">ACCESS GRANTED. Module decrypted.</p>
+                    {% else %}
+                        <div class="input-group">
+                            <input type="text" id="ans_{{ q.id }}" placeholder="Enter Output..." autocomplete="off">
+                            <button class="btn submit-btn" onclick="submitAnswer('{{ q.id }}')">Verify</button>
+                        </div>
+                        <div id="msg_{{ q.id }}" class="status-msg"></div>
+                    {% endif %}
+                </div>
+            {% endfor %}
+        </div>
+        
+        <!-- Submit Final Score: appears at 6+ solved, hidden when 8/8 (replaced by Final Decrypt) -->
+        <form id="partial-submit" action="/result" method="GET" 
+              {% if solved_count >= 6 and solved_count < 8 %}style="display: block;"{% else %}style="display: none;"{% endif %}>
+            <button type="submit" class="btn" 
+                    style="background: transparent; color:#f0a500; border-color:#f0a500; font-size:1.4rem; width:100%">
+                ⚡ SUBMIT FINAL SCORE ({{ solved_count }}/8 Solved)
+            </button>
+        </form>
+
+        <!-- Final Decrypt: appears only when all 8 solved -->
+        <form id="final-submit" action="/result" method="GET" 
+              {% if solved_count == 8 %}style="display: block;"{% else %}style="display: none;"{% endif %}>
+            <button type="submit" class="btn" 
+                    style="background:#39ff14; color:#0d1117; font-size:2rem; width:100%">
+                🔐 FINAL DECRYPT
+            </button>
+        </form>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>

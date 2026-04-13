@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Organizer - Circuit Breach Management</title>
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Share Tech Mono', monospace; background: #0a0a0c; color: #00ffcc; padding: 20px; }
+        .admin-container { max-width: 1000px; margin: 0 auto; }
+        .card { background: #161b22; border: 1px solid #333; padding: 20px; border-radius: 8px; margin-bottom: 20px; }
+        h1, h2 { text-transform: uppercase; letter-spacing: 2px; }
+        form { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+        input, select { background: #000; border: 1px solid #00ffcc; color: #fff; padding: 10px; font-family: inherit; }
+        button { background: #00ffcc; color: #000; border: none; padding: 10px 20px; font-family: inherit; font-weight: bold; cursor: pointer; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { border: 1px solid #333; padding: 12px; text-align: left; }
+        th { background: #1f2937; color: #00ffcc; }
+        .status-success { color: #00ff66; font-weight: bold; }
+        .status-pending { color: #ffcc00; }
+        .status-failed { color: #ff3333; }
+        .danger-btn { background: #ff3333; color: white; margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <div class="admin-container">
+        <h1>Round 3: Organizer Dashboard</h1>
+        
+        <div class="card">
+            <h2>Assign New Participant</h2>
+            <form action="/api/admin/add" method="POST">
+                <input type="text" name="name" placeholder="PARTICIPANT NAME" required>
+                <select name="set" required>
+                    <option value="" disabled selected>SELECT SET</option>
+                    <option value="1">Set 1 (-14)</option>
+                    <option value="2">Set 2 (10)</option>
+                    <option value="3">Set 3 (23)</option>
+                    <option value="4">Set 4 (8)</option>
+                </select>
+                <button type="submit">AUTHORIZE ACCESS</button>
+            </form>
+        </div>
+
+        <div class="card">
+            <h2>Current Participants Status</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Agent Name</th>
+                        <th>Set</th>
+                        <th>Status</th>
+                        <th>Time Since Start</th>
+                        <th>Completion Time</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for p in participants %}
+                    <tr>
+                        <td>{{ p.name }}</td>
+                        <td>Set {{ p.set }}</td>
+                        <td class="status-{{ p.status }}">{{ p.status | upper }}</td>
+                        <td>
+                            {% if p.start_time and p.status == 'pending' %}
+                                <span class="timer-active" data-start="{{ p.start_time }}">Calculating...</span>
+                            {% elif not p.start_time %}
+                                NOT STARTED
+                            {% else %}
+                                -
+                            {% endif %}
+                        </td>
+                        <td>{{ p.time_taken if p.time_taken else '-' }}s</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            
+            <form action="/api/admin/clear" method="POST" onsubmit="return confirm('WARNING: This will wipe all participant data. Proceed?')">
+                <button type="submit" class="danger-btn">WIPE ALL DATA</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function updateTimers() {
+            const now = Math.floor(Date.now() / 1000);
+            document.querySelectorAll('.timer-active').forEach(el => {
+                const start = parseInt(el.getAttribute('data-start'));
+                const diff = now - start;
+                const m = Math.floor(diff / 60);
+                const s = diff % 60;
+                el.innerText = `${m}m ${s}s`;
+            });
+        }
+        setInterval(updateTimers, 1000);
+        updateTimers();
+    </script>
+</body>
+</html>

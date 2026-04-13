@@ -1,0 +1,138 @@
+:root { /*Initialization of global variables*/
+    --bg-color: #000000;
+    --primary: #00ff00;
+    --secondary: #ff003c;
+    --glass: rgba(0, 5, 0, 0.8);
+    --glass-border: rgba(0, 255, 0, 0.4);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+    background-color: var(--bg-color);
+    color: var(--primary);
+    font-family: 'Share Tech Mono', 'Inter', monospace;
+    overflow-x: hidden;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Background effects */
+.overlay-grid {
+    position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+    background-image: 
+        linear-gradient(var(--glass-border) 1px, transparent 1px),
+        linear-gradient(90deg, var(--glass-border) 1px, transparent 1px);
+    background-size: 50px 50px;
+    opacity: 0.1; z-index: -2;
+}
+
+.scanlines {
+    position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+    background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,0) 50%, rgba(0,0,0,0.2) 50%, rgba(0,0,0,0.2));
+    background-size: 100% 4px;
+    z-index: 100; pointer-events: none; opacity: 0.3;
+}
+
+.tv-static {
+    position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+    background: url('https://raw.githubusercontent.com/IceDoge/StaticNoise/master/noise.gif');
+    opacity: 0.05; z-index: -1; pointer-events: none;
+}
+
+.glassmorphism {
+    background: var(--glass);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--glass-border);
+    box-shadow: 0 0 30px rgba(0, 255, 0, 0.15);
+    border-radius: 10px;
+    padding: 40px;
+    text-align: center;
+}
+
+/* Containers */
+.container { width: 90%; max-width: 800px; margin: auto; position: relative; z-index: 1; }
+.main-console { max-width: 1000px; }
+.panel { transition: all 0.5s ease; }
+.hidden { display: none !important; }
+
+/* Headers & Static Glitch Effect */
+.glitch {
+    font-size: 4rem; font-weight: bold; text-transform: uppercase;
+    position: relative; text-shadow: 0.05em 0 0 var(--secondary), -0.025em -0.05em 0 var(--primary), 0.025em 0.05em 0 #fff;
+    margin-bottom: 20px; letter-spacing: 2px;
+}
+
+.subtitle { font-size: 1.2rem; margin-bottom: 40px; color: #aaa; text-transform: uppercase; letter-spacing: 1px;}
+
+h2 { font-size: 2rem; margin-bottom: 20px; color: #fff; text-shadow: 0 0 10px var(--primary); }
+
+/* Inputs */
+.input-group { margin-bottom: 30px; }
+input {
+    background: transparent; border: none; border-bottom: 2px solid var(--primary);
+    color: #fff; font-size: 2rem; font-family: 'Share Tech Mono', monospace;
+    text-align: center; padding: 10px; width: 150px; outline: none; transition: 0.3s;
+}
+input:focus { border-bottom: 2px solid var(--secondary); box-shadow: 0 10px 10px -10px var(--secondary); }
+input[type="number"]::-webkit-inner-spin-button, 
+input[type="number"]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
+
+/* URL Builder */
+.url-builder {
+    display: flex; justify-content: center; align-items: baseline; gap: 5px; flex-wrap: wrap; margin-bottom: 20px;
+    background: rgba(0, 0, 0, 0.5); padding: 20px; border-radius: 10px; border: 1px solid #333;
+}
+.static-text { font-size: 1.8rem; color: #666; font-weight: bold; }
+.url-input { width: 80px; font-size: 1.8rem; border-bottom: 1px solid #555; }
+.url-input:focus { border-bottom: 2px solid var(--primary); }
+.url-input.port { width: 100px; color: var(--secondary); }
+
+/* Buttons */
+.btn-primary, .btn-secondary {
+    background: transparent; border: 2px solid var(--primary); color: var(--primary);
+    padding: 15px 40px; font-size: 1.5rem; font-family: inherit; font-weight: bold;
+    cursor: pointer; position: relative; overflow: hidden; width: auto;
+    transition: 0.3s; text-transform: uppercase;
+}
+.btn-primary:before {
+    content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
+    background: var(--primary); transition: 0.3s; z-index: -1;
+}
+.btn-primary:hover:before { left: 0; }
+.btn-primary:hover { color: #000; box-shadow: 0 0 20px var(--primary); }
+
+.btn-secondary { border-color: var(--secondary); color: var(--secondary); }
+.btn-secondary:hover { background: var(--secondary); color: #000; box-shadow: 0 0 20px var(--secondary); }
+
+/* Messages */
+.error-msg { color: var(--secondary); font-size: 1.2rem; margin-top: 10px; text-shadow: 0 0 5px var(--secondary); }
+.feedback-msg { font-size: 1.2rem; margin-bottom: 15px; }
+.success-color { color: #0f0; text-shadow: 0 0 10px #0f0;}
+
+/* Task Specific */
+.hud {
+    display: flex; justify-content: space-between; border-bottom: 1px solid var(--primary); padding-bottom: 10px; margin-bottom: 30px;
+}
+.hud-item { font-size: 1.8rem; font-weight: bold; }
+.highlight { color: #fff; text-shadow: 0 0 10px var(--primary); }
+.timer { color: var(--secondary); text-shadow: 0 0 15px var(--secondary); }
+.timer.hurry { animation: pulse 1s infinite alternate; }
+
+.questions-container {
+    text-align: left; margin-bottom: 40px; border-left: 3px solid var(--primary); padding-left: 20px;
+    max-height: 400px; overflow-y: auto;
+}
+.question { margin-bottom: 25px; padding: 15px; background: rgba(0, 240, 255, 0.05); border-radius: 5px; }
+.q-id { color: var(--secondary); margin-bottom: 5px; font-size: 1.1rem; }
+.q-text { font-family: 'Inter', sans-serif; font-size: 1.1rem; color: #ddd; line-height: 1.5; }
+
+.success-box { border: 2px solid #0f0; padding: 20px; background: rgba(0, 255, 0, 0.1); margin-top: 20px; }
+.success-box h3 { color: #0f0; margin-top: 10px; font-size: 2rem; border-bottom: none;}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: var(--bg-color); }
+::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 4px; }

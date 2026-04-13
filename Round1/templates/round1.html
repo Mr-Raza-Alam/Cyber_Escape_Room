@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cyber Escape Room - Logical Firewall</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="scanlines"></div>
+    <div class="tv-static hidden" id="tv-static"></div>
+
+    <div class="container main-console">
+        <!-- PHASE 1: SET ASSIGNMENT -->
+        <div id="phase-setup" class="panel glassmorphism">
+            <h2>LOGICAL APTITUDE TEST</h2>
+            <div style="background: rgba(0,0,0,0.3); padding: 15px; border-radius: 5px; margin-bottom: 20px; text-align: left; border-left: 3px solid var(--secondary);">
+                <p style="color: #ddd; line-height: 1.5; font-family: 'Inter', sans-serif;">
+                    <strong>Your Task:</strong> You must solve 5 logical aptitude questions under a strict 10-minute time limit. 
+                    The numeric answers to these questions are the components of a Secret URL (IP Address & Port) that unlocks the door for next round.
+                </p>
+            </div>
+            <p style="margin-bottom: 10px; color: var(--primary);">Enter the Firewall Override Set assigned to you on your physical slip:</p>
+            <div class="input-group">
+                <input type="number" id="set-input" placeholder="Set Number (1-5)" min="1" max="5">
+            </div>
+            <button id="btn-fetch" class="btn-secondary" style="display:none;">ENTER LOGICAL FIREWALL</button>
+            <p id="setup-error" class="error-msg hidden">Invalid Set Configuration. Check slip again.</p>
+        </div>
+
+        <!-- PHASE 2: TASK -->
+        <div id="phase-task" class="panel glassmorphism hidden">
+            <div class="hud">
+                <div class="hud-item">SET: <span id="display-set" class="highlight">0</span></div>
+                <div class="hud-item timer">TIME: <span id="timer-display">10:00</span></div>
+            </div>
+            
+            <div class="questions-container" id="q-container">
+                <!-- Injected via JS -->
+            </div>
+
+            <div class="submission-area">
+                <h3 style="margin-bottom: 5px;">CONSTRUCT SECRET ACCESS KEY</h3>
+                <p style="color: var(--secondary); margin-bottom: 15px; font-weight: bold; background: rgba(255,0,0,0.1); padding: 5px; border-radius: 5px;">
+                    FORMAT: <span id="dynamic-format">http://[Q_].[Q_].[Q_].[Q_]:[Q_]</span>
+                </p>
+                <div class="url-builder">
+                    <span class="static-text">http://</span>
+                    <input type="text" class="url-input ip" id="o1" maxlength="3" autocomplete="off">
+                    <span class="static-text">.</span>
+                    <input type="text" class="url-input ip" id="o2" maxlength="3" autocomplete="off">
+                    <span class="static-text">.</span>
+                    <input type="text" class="url-input ip" id="o3" maxlength="3" autocomplete="off">
+                    <span class="static-text">.</span>
+                    <input type="text" class="url-input ip" id="o4" maxlength="3" autocomplete="off">
+                    <span class="static-text">:</span>
+                    <input type="text" class="url-input port" id="port" maxlength="5" autocomplete="off">
+                </div>
+                <p id="task-feedback" class="feedback-msg hidden"></p>
+                <button id="btn-submit" class="btn-primary">INITIATE CONNECTION</button>
+            </div>
+        </div>
+
+        <!-- PHASE 3: RESULT -->
+        <div id="phase-result" class="panel glassmorphism hidden">
+            <h2 id="res-title" class="glitch" data-text=""></h2>
+            <p id="res-desc" class="subtitle"></p>
+            <div id="res-url-box" class="success-box hidden">
+                <p>Write this Exact Key Code on your answer sheet and report to CSE Lab 2 immediately!</p>
+                <h3 id="res-url"></h3>
+            </div>
+        </div>
+    </div>
+
+    <!-- Generate unique ID for polling -->
+    <script>
+        const USER_ID = Math.random().toString(36).substring(2, 15);
+    </script>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

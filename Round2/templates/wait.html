@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Cyber Escape Room: Waiting...</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>STATUS: QUALIFIED</h1>
+        <p>Hurray! You qualified for Round-2.</p>
+        <p>Please wait until the volunteers brief you.</p>
+        {% if error %}
+            <p class="error-text" style="color: #ff3333; margin-top: 10px;">{{ error }}</p>
+        {% endif %}
+        
+        <form action="/start" method="POST" style="margin-top: 20px;" onsubmit="enterFullScreen()">
+            <div style="margin-bottom: 15px;">
+                <input type="password" name="pin" maxlength="4" placeholder="PIN" required style="width: 120px; text-align: center; letter-spacing: 5px; font-size: 1.5rem; color: #39ff14; background: transparent; border: 1px solid #39ff14; padding: 10px;">
+            </div>
+            <button type="submit" class="btn">Unlock Entry Gate</button>
+        </form>
+    </div>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>
